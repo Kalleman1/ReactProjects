@@ -11,8 +11,7 @@ export default function Home() {
       <Head>
         <title>Kaspers Portfolio</title>
       </Head>
-
-     {/* Header */}
+      
      <Header />
 
      {/* Hero */}
