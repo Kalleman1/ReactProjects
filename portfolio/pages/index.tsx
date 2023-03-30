@@ -1,12 +1,18 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
 import Header from '@/Components/Header'
 import Hero from '@/Components/Hero'
 import About from '@/Components/About'
 import WorkExperience from '@/Components/WorkExperience'
 import Skills from '@/Components/Skills'
+import { PageInfo } from '@/typings'
+import { GetStaticProps } from 'next'
+import { fetchPageInfo } from '@/utils/fetchPageInfo'
 
-const inter = Inter({ subsets: ['latin'] })
+
+type Props ={
+  pageInfo: PageInfo;
+}
+
 
 export default function Home() {
   return (
@@ -40,3 +46,11 @@ export default function Home() {
      
   )
 }
+
+// export const getStaticProps: GetStaticProps<Props> = async () => {
+//   const pageInfo: PageInfo = await fetchPageInfo();
+
+//   return {props: {
+//     pageInfo
+//   }}
+// }
