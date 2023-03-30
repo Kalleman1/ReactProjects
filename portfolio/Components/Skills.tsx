@@ -15,16 +15,16 @@ export default function Skills({}: Props) {
             Hover over a skill to see
         </h2>
         <div className='grid grid-cols-4 gap-5'>
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
+            <Skill directionLeft={false} />
+            <Skill directionLeft={false} />
+            <Skill directionLeft={false} />
+            <Skill directionLeft={false} />
+            <Skill directionLeft={false} />
+            <Skill directionLeft={false} />
+            <Skill directionLeft={false} />
+            <Skill directionLeft={false} />
+            <Skill directionLeft={false} />
+            <Skill directionLeft={false} />
         </div>
     </motion.div>
   )
