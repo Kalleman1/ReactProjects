@@ -70,8 +70,8 @@ function Crud() {
                 }}
             ></input>
         </div>
-            
-            <label>Enter Description</label>
+        <div>
+        <label>Enter Description</label>
             <input
                 type="text"
                 id="descriptionbox"
@@ -80,7 +80,9 @@ function Crud() {
                     setDescription(e.target.value);
                 }}
             ></input>
-            <label>Enter Price</label>
+        </div>
+        <div>
+        <label>Enter Price</label>
             <input
                 type="number"
                 id="pricebox"
@@ -89,7 +91,9 @@ function Crud() {
                     setPrice(e.target.value);
                 }}
             ></input>
-            <label>Enter Quantity</label>
+        </div>
+        <div>
+        <label>Enter Quantity</label>
             <input
                 type="number"
                 id="quantitybox"
@@ -98,7 +102,7 @@ function Crud() {
                     setQuantity(e.target.value);
                 }}
             ></input>
-
+        </div>
             <button id="addBtn" onClick={interfaceHandler}>
                 Add data
             </button>
