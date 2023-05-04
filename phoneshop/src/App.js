@@ -1,5 +1,5 @@
 import { Crud } from './Components/crud/Index';
-import { RealtimeData } from './Components/realtimeData/Index';
+import { ProductCards } from './Components/realtimeData/ProductCards';
 import './App.css';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Navbar from './Components/Navbar';
@@ -13,11 +13,10 @@ function App() {
       <BrowserRouter>
         <Routes>
             <Route path="/crud" element={<Crud />} />
+            <Route path='' element={<ProductCards/>} />
         </Routes>
       </BrowserRouter>
     </div>
-    
-    <RealtimeData></RealtimeData>
     </>
   );
 }

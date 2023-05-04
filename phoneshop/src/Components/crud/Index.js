@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StartFirebase from '../firebaseConfig/Index';
 import { ref, set, push } from 'firebase/database';
+import {getStorage, ref as storageRef, uploadBytes} from 'firebase/storage';
 
 function Crud() {
     const [db, setDb] = useState('');
@@ -8,6 +9,8 @@ function Crud() {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
     const [quantity, setQuantity] = useState(0);
+    const [imageFile, setImageFile] = useState(null)
+
 
     useEffect(() => {
         setDb(StartFirebase());
@@ -22,9 +25,20 @@ function Crud() {
         };
     }
 
-    function addData() {
+    async function addData() {
         const data = getAllInputs();
 
+        //Upload billed-fil til Firebase storage
+        const storage = getStorage();
+        const imageRef = storageRef(storage, `images/${imageFile.name}`);
+        const snapshot = await uploadBytes(imageRef, imageFile).then(() => {
+            alert("Image uploaded")
+        });
+
+        //Get download URL for image
+        const imageUrl = await snapshot.ref.getDownloadURL();
+
+        //Tilføj produkt data til Firestore
         const productsRef = ref(db, 'products');
         const newProductRef = push(productsRef);
         const newProductId = newProductRef.key;
@@ -34,6 +48,7 @@ function Crud() {
             description: data.description,
             price: data.price,
             quantity: data.quantity,
+            imageUrl: imageUrl,
         })
             .then(() => {
                 alert('Data was added successfully');
@@ -102,6 +117,8 @@ function Crud() {
                     setQuantity(e.target.value);
                 }}
             ></input>
+        <label>Upload Image</label>
+        <input type='file' onChange={(e) => setImageFile(e.target.files[0])}/>
         </div>
             <button id="addBtn" onClick={interfaceHandler}>
                 Add data
