@@ -11,6 +11,9 @@ function Navbar() {
         <li>
             <a href="crud">CRUD </a>
         </li>
+        <li>
+          <a href="login">Login</a>
+        </li>
       </ul>
     </nav>
   );

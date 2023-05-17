@@ -3,13 +3,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
-import phone1 from "./assets/images/phone1.png";
-import phone2 from "./assets/images/phone2.png";
-import phone3 from "./assets/images/phone3.png";
+import phone1 from "../images/phone1.png";
+import phone2 from "../images/phone2.png";
+import phone3 from "../images/phone3.png";
 
 const Carrousel = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    
     const images = [
         phone1,
         phone2,

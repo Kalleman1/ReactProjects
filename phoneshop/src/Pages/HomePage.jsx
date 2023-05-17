@@ -2,7 +2,7 @@ import Divider from '../Components/Divider';
 import { ProductCards } from '../Components/ProductCards';
 import Carrousel from '../Components/Carrousel';
 
-const MainPage = () => {
+const HomePage = () => {
     return(
         <div>
             <Carrousel/>
@@ -18,4 +18,4 @@ const MainPage = () => {
     )
 }
 
-export default MainPage
+export default HomePage

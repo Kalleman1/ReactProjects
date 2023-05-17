@@ -14,9 +14,9 @@ function Crud() {
     const [products, setProducts] = useState([])
     const [selectedProductId, setSelectedProductId] = useState('');
 
-    //Bruger useEffect hook til at starte firebase, og hente de products der er.
+    //Bruger useEffect hook til at starte firebase, og hente de products der er gemt i databasen.
     useEffect(() => {
-        setDb(StartFirebase());
+        setDb(StartFirebase().database);
         const fetchProducts = async () => {
             const productsRef = ref(db, 'products');
             const productsSnapshot = await get(productsRef);
@@ -33,7 +33,7 @@ function Crud() {
         fetchProducts();
     }, [db]);
 
-    //Får fat i alle inputs i formen
+    //Returns værdierne for inputfelterne i formen.
     function getAllInputs() {
         return {
             name: name,
@@ -44,18 +44,18 @@ function Crud() {
         };
     }
 
-    //Tilføjer nyt Product til database
+    //Tilføjer nyt Product til databasen
     async function addData() {
         const data = getAllInputs();
 
-        // Upload image file to Firebase storage
+        // Upload billedfil til databasen
         const storage = getStorage();
         const imageRef = storageRef(storage, `images/${imageFile.name}`);
 
-        // Get download URL for the uploaded image
+        // Får download URL til billedet så det kan tilføjes til database objekt.
         const imageUrl = await getDownloadURL(imageRef);
 
-        // Add product data to Firestore
+        // Tilføjer produktdata til databasen
         const productsRef = ref(db, 'products');
         const newProductRef = push(productsRef);
         const newProductId = newProductRef.key;
@@ -69,7 +69,7 @@ function Crud() {
             imageUrl: imageUrl,
         };
 
-        // Set product data in the database
+        //Gemmer produktdata i databasen.
         try {
             await set(newProductRef, productData);
             alert('Data was added successfully');
@@ -90,7 +90,7 @@ function Crud() {
       const selectedProduct = products.find((product) => product.id === selectedProductId);
       const imageUrl = selectedProduct.imageUrl
 
-      //Opdaterer dataen i firebase databasen
+      //Opdaterer dataen i databasen
       const productRef = ref(db, `products/${selectedProductId}`);
       const productData = {
         name: data.name,
@@ -116,6 +116,7 @@ function Crud() {
       }
     }
 
+    //Sletter produkt fra databasen
     async function deleteData(){
 
       if (!selectedProductId){
@@ -127,7 +128,7 @@ function Crud() {
       try {
         await set(productRef, null);
         alert('Product deleted successfully')
-        //Opdaterer state på listen så produktet er fjernet.
+        //Opdaterer state på listen så produktet fjernes
         const updatedProducts = products.filter((product) => product.id !== selectedProductId);
         setProducts(updatedProducts)
       }

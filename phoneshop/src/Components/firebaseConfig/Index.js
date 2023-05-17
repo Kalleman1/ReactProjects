@@ -1,5 +1,6 @@
 import {initializeApp} from "firebase/app";
 import { getDatabase } from "firebase/database";
+import {getAuth} from 'firebase/auth'
 
 function StartFirebase(){
     const firebaseConfig = {
@@ -13,8 +14,8 @@ function StartFirebase(){
         };
 
         const app = initializeApp(firebaseConfig);
-
-        return getDatabase(app)
+        const database = getDatabase(app)
+        const auth = getAuth(app)
+        return {app, database, auth}
 }
-
 export default StartFirebase;

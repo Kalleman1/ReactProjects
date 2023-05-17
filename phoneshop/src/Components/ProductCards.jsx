@@ -1,10 +1,10 @@
 import StartFirebase from "./firebaseConfig/Index";
 import React from "react";
-import {ref, onValue} from 'firebase/database'
+import {ref, onValue, Database} from 'firebase/database'
 import { Card } from "react-bootstrap";
 import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
 
-
+//Starter Firebase og gemmer referencen i variablen 'db'
 const db = StartFirebase();
 
 export class ProductCards extends React.Component{
@@ -15,10 +15,11 @@ export class ProductCards extends React.Component{
         }
     }
 
-
+    //Kører når komponenten er monteret på DOM'en
     componentDidMount(){
-        const dbRef = ref(db, 'products');
+        const dbRef = ref(db.database, 'products');
 
+        //Lytter efter ændringer i produkterne i databasen
         onValue(dbRef,(snapshot) => {
             let records = [];
             snapshot.forEach(childSnapshot => {
