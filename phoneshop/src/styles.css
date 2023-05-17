@@ -168,3 +168,26 @@ body {
         width:25%;
         height:280px;
       }
+
+      /* CRUD styles */ 
+
+      .main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #212121;
+        color: whitesmoke;
+        flex-direction: column;
+      }
+
+      .main-header {
+        margin-bottom: 100px;
+      }
+
+      .button-crud {
+        background-color: #333;
+        border-radius: 4px;
+        color: #fff;
+        margin: 5px;
+      }
