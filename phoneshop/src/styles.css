@@ -112,3 +112,59 @@ body {
         align-items: center;
         justify-content: center;
       }
+
+      /* Divider Styles */
+      .divider {
+        height: 50px;
+        background-color: #333;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .divider-text {
+        color: #fff;
+        margin-left: 875px;
+      }
+
+      .product-image {
+        width: min-content;
+        height: min-content;
+      }
+
+
+      /*Footer styles */
+      .footer-background {
+        height: 300px;
+        background-color: #333;
+      }
+
+      .footer-header {
+        font-size: large;
+        color: #fff;
+      }
+
+      .footer-text {
+        font-size: medium;
+        color: #fff;
+      }
+
+      .left-box{
+        float:left;
+        width:25%;
+        height:280px;
+        align-items: center;
+      }
+
+      .middle-box{
+        float:left;
+        width:50%;
+        height:280px;
+
+      }
+
+      .right-box{
+        float:right;
+        width:25%;
+        height:280px;
+      }

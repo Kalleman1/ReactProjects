@@ -122,7 +122,7 @@ function Crud() {
         <label>Upload Image</label>
         <input type='file' onChange={(e) => setImageFile(e.target.files[0])}/>
         </div>
-            <button id="addBtn" onClick={interfaceHandler}>
+            <button id="addBtn"  onClick={interfaceHandler}>
                 Add data
             </button>
             <button id="updateBtn" onClick={interfaceHandler}>
