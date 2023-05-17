@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StartFirebase from '../firebaseConfig/Index';
 import { ref, set, push } from 'firebase/database';
-import {getStorage, ref as storageRef, uploadBytes} from 'firebase/storage';
+import {getStorage, ref as storageRef, uploadBytes, getDownloadURL} from 'firebase/storage';
 
 function Crud() {
     const [db, setDb] = useState('');
@@ -22,41 +22,43 @@ function Crud() {
             description: description,
             price: Number(price),
             quantity: Number(quantity),
+            imageFile: imageFile
         };
     }
 
     async function addData() {
         const data = getAllInputs();
-
-        //Upload billed-fil til Firebase storage
+      
+        // Upload image file to Firebase storage
         const storage = getStorage();
         const imageRef = storageRef(storage, `images/${imageFile.name}`);
-        const snapshot = await uploadBytes(imageRef, imageFile).then(() => {
-            alert("Image uploaded")
-        });
-
-        //Get download URL for image
-        const imageUrl = await snapshot.ref.getDownloadURL();
-
-        //Tilføj produkt data til Firestore
+        const snapshot = await uploadBytes(imageRef, imageFile);
+      
+        // Get download URL for the uploaded image
+        const imageUrl = await getDownloadURL(imageRef);
+      
+        // Add product data to Firestore
         const productsRef = ref(db, 'products');
         const newProductRef = push(productsRef);
         const newProductId = newProductRef.key;
-        set(newProductRef, {
-            id: newProductId,
-            name: data.name,
-            description: data.description,
-            price: data.price,
-            quantity: data.quantity,
-            imageUrl: imageUrl,
-        })
-            .then(() => {
-                alert('Data was added successfully');
-            })
-            .catch((error) => {
-                alert('There was an error, details: ' + error);
-            });
-    }
+        
+        const productData = {
+          id: newProductId,
+          name: data.name,
+          description: data.description,
+          price: data.price,
+          quantity: data.quantity,
+          imageUrl: imageUrl,
+        };
+      
+        // Set product data in the database
+        try {
+          await set(newProductRef, productData);
+          alert('Data was added successfully');
+        } catch (error) {
+          alert('There was an error, details: ' + error);
+        }
+      }
 
     function interfaceHandler(event) {
         const id = event.target.id;

@@ -15,6 +15,7 @@ export class ProductCards extends React.Component{
         }
     }
 
+
     componentDidMount(){
         const dbRef = ref(db, 'products');
 
@@ -51,15 +52,21 @@ export class ProductCards extends React.Component{
     
             return (
               <Card key={index} className="product-card">
-                <Card.Img variant="top" src={row.data.imageUrl} />
-                <Card.Body>
-                  <Card.Title>{row.data.name}</Card.Title>
-                  <Card.Text>{row.data.description}</Card.Text>
-                  <Card.Text>Price: {row.data.price}</Card.Text>
-                  <Card.Text>Quantity: {row.data.quantity}</Card.Text>
-                  <button className="button-addCart">Add to cart</button>
-                </Card.Body>
-              </Card>
+    <div className="product-card-content">
+      <div className="product-card-image">
+        <Card.Img src={row.data.imageUrl}/>
+      </div>
+      <div className="product-card-details">
+        <Card.Body>
+          <Card.Title>{row.data.name}</Card.Title>
+          <Card.Text>{row.data.description}</Card.Text>
+          <Card.Text>Price: {row.data.price}</Card.Text>
+          <Card.Text>Quantity: {row.data.quantity}</Card.Text>
+          <button className="button-addCart">Add to cart</button>
+        </Card.Body>
+      </div>
+    </div>
+  </Card>
             )
           })}
         </div>
