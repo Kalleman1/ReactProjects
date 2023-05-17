@@ -1,5 +1,5 @@
 import Divider from '../Components/Divider';
-import { ProductCards } from '../Components/realtimeData/ProductCards';
+import { ProductCards } from '../Components/ProductCards';
 import Carrousel from '../Components/Carrousel';
 
 const MainPage = () => {

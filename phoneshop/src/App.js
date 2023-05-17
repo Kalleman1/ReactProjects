@@ -1,4 +1,4 @@
-import { Crud } from './Components/crud/Index';
+import { Crud } from './Pages/CRUDPage';
 import './App.css';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Navbar from './Components/Navbar';

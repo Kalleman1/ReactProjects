@@ -1,4 +1,4 @@
-import StartFirebase from "../firebaseConfig/Index";
+import StartFirebase from "./firebaseConfig/Index";
 import React from "react";
 import {ref, onValue} from 'firebase/database'
 import { Card } from "react-bootstrap";
