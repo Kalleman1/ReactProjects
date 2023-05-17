@@ -3,6 +3,7 @@ import { ProductCards } from './Components/realtimeData/ProductCards';
 import './App.css';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Navbar from './Components/Navbar';
+import Carrousel from './Components/Carrousel';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
             <Route path="/crud" element={<Crud />} />
-            <Route path='' element={<ProductCards/>} />
+            <Route path='' element={<><Carrousel/><p><br></br></p><ProductCards/></>} />
         </Routes>
       </BrowserRouter>
     </div>
