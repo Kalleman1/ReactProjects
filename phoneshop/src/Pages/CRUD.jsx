@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StartFirebase from '../Components/firebaseConfig/Index';
-import { ref, set, push, get} from 'firebase/database';
-import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
+import { getDatabase, ref, set, push, get } from 'firebase/database';
+import { getStorage, ref as storageRef, getDownloadURL, uploadBytes, uploadBytesResumable } from 'firebase/storage';
 import { Alert } from 'react-bootstrap';
 
 function Crud() {
@@ -44,40 +44,47 @@ function Crud() {
         };
     }
 
-    //Tilføjer nyt Product til databasen
     async function addData() {
-        const data = getAllInputs();
-
-        // Upload billedfil til databasen
-        const storage = getStorage();
-        const imageRef = storageRef(storage, `images/${imageFile.name}`);
-
-        // Får download URL til billedet så det kan tilføjes til database objekt.
-        const imageUrl = await getDownloadURL(imageRef);
-
-        // Tilføjer produktdata til databasen
-        const productsRef = ref(db, 'products');
-        const newProductRef = push(productsRef);
-        const newProductId = newProductRef.key;
-
-        const productData = {
-            id: newProductId,
-            name: data.name,
-            description: data.description,
-            price: data.price,
-            quantity: data.quantity,
-            imageUrl: imageUrl,
-        };
-
-        //Gemmer produktdata i databasen.
-        try {
+      const data = getAllInputs();
+    
+      const storage = getStorage();
+      const storageReference = storageRef(storage, `images/${imageFile.name}`);
+      const uploadTask = uploadBytesResumable(storageReference, imageFile);
+    
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          // Upload progress monitoring if needed
+        },
+        (error) => {
+          console.error('Error occurred during upload:', error);
+        },
+        async () => {
+          try {
+            const imageUrl = await getDownloadURL(uploadTask.snapshot.ref);
+    
+            const productsRef = ref(db, 'products');
+            const newProductRef = push(productsRef);
+            const newProductId = newProductRef.key;
+    
+            const productData = {
+              id: newProductId,
+              name: data.name,
+              description: data.description,
+              price: data.price,
+              quantity: data.quantity,
+              imageUrl: imageUrl,
+            };
+    
             await set(newProductRef, productData);
             alert('Data was added successfully');
-            
-        } catch (error) {
+          } catch (error) {
             alert('There was an error, details: ' + error);
+          }
         }
+      );
     }
+    
 
     //Opdaterer et produkt i databasen
     async function updateData(){

@@ -9,7 +9,7 @@ function Navbar() {
             <a href="../">About</a>
         </li>
         <li>
-            <a href="crud">CRUD </a>
+            <a href="crud">Admin page</a>
         </li>
         <li>
           <a href="login">Login</a>
