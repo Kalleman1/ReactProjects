@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StartFirebase from '../Components/firebaseConfig/Index';
-import { getDatabase, ref, set, push, get } from 'firebase/database';
-import { getStorage, ref as storageRef, getDownloadURL, uploadBytes, uploadBytesResumable } from 'firebase/storage';
+import { ref, set, push, get } from 'firebase/database';
+import { getStorage, ref as storageRef, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { Alert } from 'react-bootstrap';
 
 function Crud() {
