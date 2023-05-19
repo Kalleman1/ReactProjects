@@ -1,11 +1,13 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import StartFirebase from "../Components/firebaseConfig/Index";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Components/AuthContext";
 
 const Login = () => {
     const {auth} = StartFirebase();
     const navigate = useNavigate();
+    const {loginUser} = useContext(AuthContext)
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,7 +17,9 @@ const Login = () => {
 
         await signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            const user = userCredential.user;
+            const loggedInUser = userCredential.user;
+            loginUser(loggedInUser);
+            console.log(loggedInUser)
             navigate("../")
         })
         .catch((error) =>{
@@ -29,6 +33,7 @@ const Login = () => {
             <section>
                 <div className="main">
                     <h1>Login to your account</h1>
+                    <p>Currently logged in as</p>
                     <form>
                         <div className="child">
                             <label htmlFor="email-address">Email address</label>
