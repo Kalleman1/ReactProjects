@@ -1,7 +1,7 @@
-import Divider from '../Components/Divider';
-import { ProductCards } from '../Components/ProductCards';
-import Carrousel from '../Components/Carrousel';
-import { AuthContext } from '../Components/AuthContext';
+import Divider from '../Components/home/Divider';
+import { ProductCards } from '../Components/home/ProductCards';
+import Carrousel from '../Components/home/Carrousel';
+import { AuthContext } from '../Components/Context/AuthContext';
 import { useContext } from 'react';
 
 

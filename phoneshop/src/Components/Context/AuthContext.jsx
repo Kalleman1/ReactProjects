@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import StartFirebase from "./firebaseConfig/Index";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import StartFirebase from "../../Components/firebaseConfig/Index";
 
 export const AuthContext = createContext();
 
@@ -24,9 +24,11 @@ export const AuthProvider = ({ children }) => {
 
   const loginUser = (loggedInUser) => {
     setUser(loggedInUser);
+    console.log(user);
   };
 
   const logoutUser = () => {
+    signOut(auth);
     setUser(null);
   };
 

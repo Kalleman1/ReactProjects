@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AuthContext } from './AuthContext';
+import { AuthContext } from './Context/AuthContext';
 
 function Navbar() {
   const { user, logoutUser } = useContext(AuthContext);

@@ -2,10 +2,11 @@ import React, {useState} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import { motion } from 'framer-motion';
 
-import phone1 from "../images/phone1.png";
-import phone2 from "../images/phone2.png";
-import phone3 from "../images/phone3.png";
+import phone1 from "../../images/phone1.png";
+import phone2 from "../../images/phone2.png";
+import phone3 from "../../images/phone3.png";
 
 const Carrousel = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -33,7 +34,13 @@ const Carrousel = () => {
     };
 
     return (
-        <>
+        <motion.div
+        initial={{
+            opacity: 0
+        }}
+        animate={{
+            opacity: 1
+        }}>
         <p className="carousel-text">Check out our latest phones:</p>
         <Slider {...settings}>
             {images.map((image, index) => (
@@ -42,7 +49,7 @@ const Carrousel = () => {
                 </div>
             ))}
         </Slider>
-        </>
+        </motion.div>
     );
 };
 

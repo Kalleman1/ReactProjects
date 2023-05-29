@@ -2,7 +2,7 @@ import React, {useContext, useState} from "react";
 import StartFirebase from "../Components/firebaseConfig/Index";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { NavLink, useNavigate } from "react-router-dom";
-import { AuthContext } from "../Components/AuthContext";
+import { AuthContext } from "../Components/Context/AuthContext";
 
 const Login = () => {
     const {auth} = StartFirebase();
