@@ -243,4 +243,29 @@ body {
         vertical-align: top; /* Align labels at the top */
       }
 
+      /* Cart styles */ 
+
+      .cart-table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      .cart-table th,
+      .cart-table td {
+        padding: 12px;
+      }
+      
+      .cart-table td {
+        border-top: 1px solid #ddd;
+      }
+      
+      .cart-table tr:last-child td {
+        border-bottom: 1px solid #ddd;
+      }
+
+      .cart-remove-btn {
+        background-color: red;
+        color: aliceblue;
+        border-color: white;
+      }
       

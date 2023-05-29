@@ -46,6 +46,12 @@ export class ProductCards extends React.Component {
   
     this.setState({ tableData: updatedTableData, imageLoadErrors: errorIndexes });
   }
+
+  handleAddToCart = (item) => {
+    const updatedCartItems = [...this.props.cartItems, item];
+    this.props.setCartItems(updatedCartItems);
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+  };
   
   
 
@@ -62,7 +68,7 @@ export class ProductCards extends React.Component {
               <Card.Text>{row.data.description}</Card.Text>
               <Card.Text>Price: {row.data.price}</Card.Text>
               <Card.Text>Quantity: {row.data.quantity}</Card.Text>
-              <button className="button-addCart">Add to cart</button>
+              <button className="button-addCart" onClick={() => this.handleAddToCart(row)}>Add to cart</button>
             </Card.Body>
           </Card>
         ))}

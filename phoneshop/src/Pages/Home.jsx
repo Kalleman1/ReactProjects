@@ -6,7 +6,7 @@ import { useContext } from 'react';
 
 
 
-const HomePage = () => {
+const Home = ({cartItems, setCartItems}) => {
     const {user} = useContext(AuthContext)
 
     return(
@@ -21,9 +21,9 @@ const HomePage = () => {
             <p>
                 <br/>
             </p>
-            <ProductCards/>
+            <ProductCards cartItems={cartItems} setCartItems={setCartItems} />
         </div>
     )
 }
 
-export default HomePage
+export default Home

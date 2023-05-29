@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import StartFirebase from '../Components/firebaseConfig/Index';
 import { ref, set, push, get } from 'firebase/database';
 import { getStorage, ref as storageRef, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { Alert } from 'react-bootstrap';
+import { motion } from 'framer-motion';
+import { AuthContext } from '../Components/Context/AuthContext';
 
 function Crud() {
     const [db, setDb] = useState('');
@@ -13,6 +15,7 @@ function Crud() {
     const [imageFile, setImageFile] = useState(null)
     const [products, setProducts] = useState([])
     const [selectedProductId, setSelectedProductId] = useState('');
+    const { user } = useContext(AuthContext);
 
     //Bruger useEffect hook til at starte firebase, og hente de products der er gemt i databasen.
     useEffect(() => {
@@ -155,9 +158,9 @@ function Crud() {
             deleteData();
         }
     }
-
-    return (
-        <div className='main'>
+    if(user !== null){
+      return (
+        <motion.div className='main' initial={{opacity: 0}} animate={{opacity: 1}}>
           <h1 className='main-header'>Create, Read, Update and delete products from the database</h1>
           <div className='crud-item'>
             <div className='crud-item-left'>
@@ -249,8 +252,16 @@ function Crud() {
             Delete product
           </button>
           </div>
-        </div>
+        </motion.div>
       );
+    }
+    else{
+      return(
+        <div className='notLoggedInDiv'>
+          <p>Please login to use CRUD functionality!</p>
+        </div>
+      )
+    }
 }
 
 export { Crud };
